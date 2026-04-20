@@ -1,0 +1,1 @@
+include("input_function_solar.jl")
