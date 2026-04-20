@@ -1,6 +1,6 @@
 name = "RESimulatorCore"
 uuid = "9831efa8-0d80-43cc-9004-a3150fbf83f2"
-version = "1.0.0-DEV"
+version = "0.1.0-DEV"
 authors = ["PeterSomkuti <peter.somkuti@gmail.com>"]
 
 [deps]
