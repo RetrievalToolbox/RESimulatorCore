@@ -1,3 +1,6 @@
-# Simulator
+# RESimulatorCore
 
-[![Build Status](https://github.com/PeterSomkuti/Simulator.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/PeterSomkuti/Simulator.jl/actions/workflows/CI.yml?query=branch%3Amain)
+Main simulator interface to [RetrievalToolbox](https://github.com/US-GHG-Center/RetrievalToolbox.jl).
+
+> [!WARNING]
+> RESimulatorCore is currently in stages of very early development.
