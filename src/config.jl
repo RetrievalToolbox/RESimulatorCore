@@ -93,8 +93,8 @@ end
     vmr_levels::Dict{String, Vector{Float64}}
 
     # Meteorological profiles on MET pressure levels. These must be in meaningful units
-    met_pressure_levels::Vector{<:Unitful.Pressure}
-    specific_humidity_levels::Vector{Float64}
-    temperature_levels::Vector{<:Unitful.Temperature}
+    met_pressure::Vector{<:Unitful.Pressure}
+    specific_humidity::Vector{Float64}
+    temperature::Vector{<:Unitful.Temperature}
 
 end

@@ -88,9 +88,9 @@ function process_scene!(
     end
 
     # Ingest the meteorological variables
-    RE.ingest!(buffer.scene.atmosphere, :met_pressure_levels, config.met_pressure_levels)
-    RE.ingest!(buffer.scene.atmosphere, :specific_humidity_levels, config.specific_humidity_levels)
-    RE.ingest!(buffer.scene.atmosphere, :temperature_levels, config.temperature_levels)
+    RE.ingest!(buffer.scene.atmosphere, :met_pressure, config.met_pressure)
+    RE.ingest!(buffer.scene.atmosphere, :specific_humidity, config.specific_humidity)
+    RE.ingest!(buffer.scene.atmosphere, :temperature, config.temperature)
 
     #=
         Run the forward model

@@ -49,17 +49,17 @@ function write_scenes_into_nc(
     # MET profiles
     grp_met = defGroup(grp, "Meteorology")
 
-    met_p = defVar(grp_met, "met_pressure_levels", Float64, ("met_level", "scene",),
+    met_p = defVar(grp_met, "met_pressure", Float64, ("met_level", "scene",),
         attrib = OrderedDict(
             "units" => unit_str(global_config.atmosphere.met_pressure_unit)
         )
     )
-    met_q = defVar(grp_met, "specific_humidity_levels", Float64, ("met_level", "scene",),
+    met_q = defVar(grp_met, "specific_humidity", Float64, ("met_level", "scene",),
         attrib = OrderedDict(
         "units" => unit_str(global_config.atmosphere.specific_humidity_unit)
         )
     )
-    met_T = defVar(grp_met, "temperature_levels", Float64, ("met_level", "scene",),
+    met_T = defVar(grp_met, "temperature", Float64, ("met_level", "scene",),
         attrib = OrderedDict(
             "units" => unit_str(global_config.atmosphere.temperature_unit)
         )
@@ -101,9 +101,9 @@ function write_scenes_into_nc(
         lats[i_scene] = scene.loc_latitude
         alts[i_scene] = ustrip(scene.loc_altitude)
 
-        met_p[:, i_scene] = ustrip(scene.met_pressure_levels)
-        met_q[:, i_scene] = ustrip(scene.specific_humidity_levels)
-        met_T[:, i_scene] = ustrip(scene.temperature_levels)
+        met_p[:, i_scene] = ustrip(scene.met_pressure)
+        met_q[:, i_scene] = ustrip(scene.specific_humidity)
+        met_T[:, i_scene] = ustrip(scene.temperature)
 
         p[:, i_scene] = ustrip(scene.pressure_levels)
 
