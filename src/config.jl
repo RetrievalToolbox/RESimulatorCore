@@ -37,7 +37,8 @@ end
     # One model for each spectral window
     models::Vector{Symbol}
     # A vector of dicts for each spectral window
-    model_options::Vector{Union{Vector{T}, T} where {T <: AbstractDict}}
+    model_options::Vector{Union{Vector{T}, T} where {T <: AbstractDict}}=[Dict()]
+
 end
 
 

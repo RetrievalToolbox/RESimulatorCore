@@ -86,13 +86,17 @@ function create_buffer(
 
         rt = buffer.rt[swin]
 
-        # Add each key/value pair. We cannot just replace the entire dictionary since that
-        # field in the type cannot be changed (RT buffers themselves are immutable)
-        empty!(rt.model_options)
+        # For XRTM-type models, we have to manage model options
+        if rt.model === :XRTM
+            # Add each key/value pair. We cannot just replace the entire dictionary since
+            # that field in the type cannot be changed (RT buffers themselves are
+            # immutable)
+            empty!(rt.model_options)
 
-        # Currently use the same RT options for each window..
-        for mo in config.RT.model_options[i_swin]
-            push!(rt.model_options, mo)
+            # Currently use the same RT options for each window..
+            for mo in config.RT.model_options[i_swin]
+                push!(rt.model_options, mo)
+            end
         end
     end
 
