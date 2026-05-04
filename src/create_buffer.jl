@@ -86,8 +86,9 @@ function create_buffer(
 
         rt = buffer.rt[swin]
 
-        # For XRTM-type models, we have to manage model options
-        if rt.model === :XRTM
+        if rt isa RE.MonochromaticRTMethod
+            # For these RT-types, we have to manage model options
+
             # Add each key/value pair. We cannot just replace the entire dictionary since
             # that field in the type cannot be changed (RT buffers themselves are
             # immutable)
@@ -97,6 +98,7 @@ function create_buffer(
             for mo in config.RT.model_options[i_swin]
                 push!(rt.model_options, mo)
             end
+
         end
     end
 

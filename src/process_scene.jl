@@ -34,6 +34,19 @@ function ingest_surface!(
                 error("We only support a single BRDF kernel at the moment!")
             end
 
+        elseif surface isa RE.LambertianPolynomialSurface
+
+            if length(surface.coefficients) < N_para
+                @error "Surface $(surface) does not have enough coefficients to \
+                        hold $(N_para) parameters!"
+            end
+            
+            surface.coefficients[1:N_para] .= config.surface_parameters[i_swin]
+
+        elseif surface isa RE.NoSurface
+
+            # Nothing to do, really..
+            
         else
 
             error("Unsupported surface type: $(typeof(surface))")
