@@ -87,8 +87,13 @@ function process_scene!(
     # Calculate solar Doppler shift value
     solar_doppler_factor = RE.calculate_solar_doppler_shift(loc, buffer.scene.time)
 
-    # Calculate solar angles
-    RE.update_solar_angles!(buffer.scene)
+    # Calculate solar angles, but only if they are ZERO in the scene config
+    if (config.solar_zenith_angle ≈ 0) & (config.solar_azimuth_angle ≈ 0)
+        RE.update_solar_angles!(buffer.scene)
+        # Back-substitude
+        config.solar_zenith_angle = buffer.scene.solar_zenith
+        config.solar_azimuth_angle = buffer.scene.solar_azimuth
+    end
 
     # If solar angles are bad, we simply fill the result with NaNs and issue a warning..
     # (maybe write a separate function to do this..)
@@ -123,6 +128,7 @@ function process_scene!(
             @error "Gas name $(gas) was not found inside the buffer's atmosphere!"
             exit(1)
         end
+        # Note that units are set earlier as part of the global config generation.
         @views gas.vmr_levels[:] .= vmr_levels[:]
     end
 

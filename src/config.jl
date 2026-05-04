@@ -65,7 +65,7 @@ end
 end
 
 
-@kwdef struct SimulatorSceneConfig
+@kwdef mutable struct SimulatorSceneConfig
 
     # Date
     date::DateTime
