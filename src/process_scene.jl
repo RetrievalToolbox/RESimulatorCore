@@ -89,7 +89,7 @@ function process_scene!(
 
     # If solar angles are bad, we simply fill the result with NaNs and issue a warning..
     # (maybe write a separate function to do this..)
-    sza = buffer.scene.solar_zenith_angle
+    sza = buffer.scene.solar_zenith
     if (sza >= 90) | (sza < 0)
         @warn "Invalid solar zenith angle: $(sza). Results will be NaN"
 
