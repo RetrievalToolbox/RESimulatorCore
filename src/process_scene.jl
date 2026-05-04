@@ -87,10 +87,27 @@ function process_scene!(
     # Calculate solar angles
     RE.update_solar_angles!(buffer.scene)
 
+    # If solar angles are bad, we simply fill the result with NaNs and issue a warning..
+    # (maybe write a separate function to do this..)
+    sza = buffer.scene.solar_zenith_angle
+    if (sza >= 90) | (sza < 0)
+        @warn "Invalid solar zenith angle: $(sza). Results will be NaN"
+
+        for (swin, rt) in buffer.rt
+            rt.hires_radiance[:] .= NaN
+        end
+
+        result = [
+            copy(buffer.rt[swin].hires_radiance) for swin in buffer.spectral_window
+        ]
+
+        return result
+    end
+
+
     # Take the surface parameters and move them into the surface objects. We respect the
     # order according to the spectral windows.
     ingest_surface!(buffer, config)
-
 
     # Ingest the RT pressure levels
     RE.ingest!(buffer.scene.atmosphere, :pressure_levels, config.pressure_levels)
