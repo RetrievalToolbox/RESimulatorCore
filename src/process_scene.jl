@@ -40,13 +40,13 @@ function ingest_surface!(
                 @error "Surface $(surface) does not have enough coefficients to \
                         hold $(N_para) parameters!"
             end
-            
+
             surface.coefficients[1:N_para] .= config.surface_parameters[i_swin]
 
         elseif surface isa RE.NoSurface
 
             # Nothing to do, really..
-            
+
         else
 
             error("Unsupported surface type: $(typeof(surface))")
@@ -80,6 +80,12 @@ function process_scene!(
 
     # Move into buffer
     buffer.scene.location = loc
+
+    # Calculate solar Doppler shift value
+    solar_doppler_factor = RE.calculate_solar_doppler_shift(loc, buffer.scene.time)
+
+    # Calculate solar angles
+    RE.update_solar_angles!(buffer.scene)
 
     # Take the surface parameters and move them into the surface objects. We respect the
     # order according to the spectral windows.
