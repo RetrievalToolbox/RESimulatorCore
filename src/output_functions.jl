@@ -47,6 +47,18 @@ function write_scenes_into_nc(
         )
     )
 
+    szas = defVar(grp, "solar_zenith_angle", Float64, ("scene",),
+        attrib = OrderedDict(
+            "units" => "degrees"
+        )
+    )
+
+    saas = defVar(grp, "solar_azimuth_angle", Float64, ("scene",),
+        attrib = OrderedDict(
+            "units" => "degrees"
+        )
+    )
+
     # MET profiles
     grp_met = defGroup(grp, "Meteorology")
 
@@ -101,6 +113,9 @@ function write_scenes_into_nc(
         lons[i_scene] = scene.loc_longitude
         lats[i_scene] = scene.loc_latitude
         alts[i_scene] = ustrip(scene.loc_elevation)
+
+        szas[i_scene] = scene.solar_zenith_angle
+        saas[i_scene] = scene.solar_azimuth_angle
 
         met_p[:, i_scene] = ustrip(scene.met_pressure)
         met_q[:, i_scene] = ustrip(scene.specific_humidity)
