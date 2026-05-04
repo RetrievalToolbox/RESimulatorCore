@@ -81,7 +81,7 @@ end
     # Location
     loc_longitude::Float64
     loc_latitude::Float64
-    loc_altitude::Unitful.Length
+    loc_elevation::Unitful.Length
 
     # Surface parameters
     surface_parameters::Vector{Tuple}

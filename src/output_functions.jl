@@ -40,9 +40,10 @@ function write_scenes_into_nc(
         )
     )
 
-    alts = defVar(grp, "altitude", Float64, ("scene",),
+    # For now, we only grab the first entry and extract the unit..
+    alts = defVar(grp, "elevation", Float64, ("scene",),
         attrib = OrderedDict(
-            "units" => unit_str(global_config.atmosphere.altitude_unit)
+            "units" => unit_str(scene_config[1].loc_elevation |> unit)
         )
     )
 
@@ -99,7 +100,7 @@ function write_scenes_into_nc(
 
         lons[i_scene] = scene.loc_longitude
         lats[i_scene] = scene.loc_latitude
-        alts[i_scene] = ustrip(scene.loc_altitude)
+        alts[i_scene] = ustrip(scene.loc_elevation)
 
         met_p[:, i_scene] = ustrip(scene.met_pressure)
         met_q[:, i_scene] = ustrip(scene.specific_humidity)

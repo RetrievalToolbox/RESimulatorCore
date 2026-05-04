@@ -61,8 +61,8 @@ function process_scene!(
     loc = RE.EarthLocation(
         config.loc_longitude,
         config.loc_latitude,
-        config.loc_altitude |> ustrip,
-        config.loc_altitude |> unit
+        config.loc_elevation |> ustrip,
+        config.loc_elevation |> unit
     )
 
     # Move into buffer
