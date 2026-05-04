@@ -81,6 +81,9 @@ function process_scene!(
     # Move into buffer
     buffer.scene.location = loc
 
+    # Set scene DateTime
+    buffer.scene.time = config.date
+
     # Calculate solar Doppler shift value
     solar_doppler_factor = RE.calculate_solar_doppler_shift(loc, buffer.scene.time)
 
